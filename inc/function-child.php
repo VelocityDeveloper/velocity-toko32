@@ -27,7 +27,6 @@ add_action('after_setup_theme', 'velocitychild_theme_setup', 9);
 
 function velocitychild_theme_setup()
 {
-
     if (class_exists('Kirki')) :
 
         Kirki::add_panel('panel_toko32', [
