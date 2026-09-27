@@ -9,7 +9,7 @@
 get_header();
 $container        = get_theme_mod('justg_container_type', 'container');
 $search_query     = new WP_Query(array(
-    'post_type'         => 'product',
+    'post_type'         => 'store_product',
     'post_status'       => 'publish',
     'order'             => 'asc',
     'orderby'           => 'title',
@@ -28,7 +28,7 @@ $search_query     = new WP_Query(array(
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <?php the_title('<h1 class="entry-title fs-4 m-0">', '</h1>'); ?>
                     <span>
-                        <?php echo do_shortcode('[print targetid="main"]'); ?>
+                        <button type="button" class="btn btn-sm bg-colortheme text-white d-print-none" onclick="window.print()">Cetak</button>
                     </span>
                 </div>
 
@@ -47,14 +47,16 @@ $search_query     = new WP_Query(array(
                                 <tbody>
                                     <?php while ($search_query->have_posts()) : $search_query->the_post(); ?>
                                         <tr>
-                                            <td><?php echo get_post_meta(get_the_ID(), 'sku', true); ?></td>
-                                            <td><?php echo get_the_title(); ?></td>
+                                            <?php // Meta produk VD Store (_store_sku, _store_stock, _store_weight_kg).
+                                            $berat = get_post_meta(get_the_ID(), '_store_weight_kg', true); ?>
+                                            <td><?php echo esc_html(get_post_meta(get_the_ID(), '_store_sku', true)); ?></td>
+                                            <td><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></td>
                                             <td>
-                                                <div class="ratio ratio-1x1"><img src="<?php echo get_the_post_thumbnail_url(); ?>" /></div>
+                                                <div class="ratio ratio-1x1" style="max-width:80px"><?php echo do_shortcode('[wp_store_thumbnail width="80" height="80" crop="true" label="false" hover="none"]'); ?></div>
                                             </td>
-                                            <td><?php echo get_post_meta(get_the_ID(), 'stok', true); ?></td>
-                                            <td><?php echo get_post_meta(get_the_ID(), 'berat', true); ?></td>
-                                            <td class="fw-bold"><?php echo do_shortcode('[harga]'); ?></td>
+                                            <td><?php echo esc_html(get_post_meta(get_the_ID(), '_store_stock', true)); ?></td>
+                                            <td><?php echo $berat !== '' ? esc_html($berat) . ' kg' : ''; ?></td>
+                                            <td class="fw-bold"><?php echo do_shortcode('[wp_store_price]'); ?></td>
                                         </tr>
                                     <?php endwhile; ?>
                                 </tbody>

@@ -8,20 +8,22 @@
     <div class="py-2 header-container">
         <div class="row text-center align-items-center py-0 m-0">
             <div class="col-md-4 p-0 text-md-start">
-                <?php $sitelogo = velocitytheme_option('custom_logo'); ?>
+                <?php $sitelogo = get_theme_mod('custom_logo'); ?>
                 <div class="position-relative">
                     <?php if ($sitelogo) : ?>
-                        <a href="<?php get_home_url(); ?>">
-                            <img src="<?php echo wp_get_attachment_image_url($sitelogo, 'full'); ?>" alt="Site Logo" loading="lazy">
+                        <a href="<?php echo esc_url(home_url('/')); ?>">
+                            <img class="img-fluid" src="<?php echo esc_url(wp_get_attachment_image_url($sitelogo, 'full')); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
                         </a>
-                    <?php endif;  ?>
+                    <?php else : ?>
+                        <a class="h3 fw-bold colortheme text-decoration-none" href="<?php echo esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="col-md-4 p-0"><?php echo do_shortcode('[vd-search]'); ?></div>
             <div class="col-md-4 profile-icons p-0">
-                <div class="d-flex float-md-end">
-                    <div class="p-2"><?php echo do_shortcode('[cart]'); ?></div>
-                    <div class="p-2"><?php echo do_shortcode('[profile]'); ?></div>
+                <div class="d-flex justify-content-center justify-content-md-end align-items-center">
+                    <div class="p-2"><?php echo do_shortcode('[wp_store_cart size="22"]'); ?></div>
+                    <div class="p-2"><?php echo velocity_toko32_profil(); ?></div>
                 </div>
             </div>
         </div>

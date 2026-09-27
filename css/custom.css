@@ -52,7 +52,7 @@
 #primary-menu > li.current_page_item > a,
 #primary-menu > li.current-menu-item > a,
 #primary-menu > li > a:hover {
-    color: var(--bs-light);
+    color: var(--bs-light) !important;
     background-color: var(--velocitytoko-color-main);
 }
 .dropdown-menu>li>a {
@@ -143,5 +143,31 @@
     .st-key {
         width: 25% !important;
         text-align: left !important;
+    }
+}
+
+/* Cetak pricelist: hanya judul + tabel harga, tanpa header, menu, footer, tombol mengambang, latar. */
+@media print {
+    .page-template-page-pricelist #wrapper-header,
+    .page-template-page-pricelist .site-footer,
+    .page-template-page-pricelist .floating-footer,
+    .page-template-page-pricelist .justg-top-content,
+    .page-template-page-pricelist #wpadminbar {
+        display: none !important;
+    }
+    .page-template-page-pricelist,
+    .page-template-page-pricelist body {
+        background: #fff none !important;
+    }
+    .page-template-page-pricelist .card,
+    .page-template-page-pricelist #content {
+        box-shadow: none !important;
+        border: 0 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .page-template-page-pricelist .table tr {
+        break-inside: avoid;
     }
 }

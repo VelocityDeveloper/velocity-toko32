@@ -152,6 +152,16 @@ function vd_search()
             </div>
         </form>
     </div>
-<?php
-    return ob_get_clean();
+<?php return ob_get_clean();
+}
+
+// [kontak-inline style="true"] — kontak toko dari pengaturan VD Store
+add_shortcode('kontak-inline', 'vd_kontak_inline');
+function vd_kontak_inline($atts)
+{
+    $atribut = shortcode_atts(array(
+        'style' => 'true',
+    ), $atts);
+    $class = $atribut['style'] == 'true' ? 'btn-sm d-block mb-1 btn btn-outline-dark' : 'btn btn-sm btn-link';
+    return velocity_toko32_kontak($class);
 }
