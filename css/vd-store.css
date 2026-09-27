@@ -117,6 +117,11 @@
 .footer-widget .kontak-widget .btn {
     color: var(--bs-body-color);
 }
+/* Saat disorot latar tombol gelap: teks & ikon putih agar tetap terbaca. */
+.footer-widget .kontak-widget .btn:hover,
+.footer-widget .kontak-widget .btn:focus {
+    color: #fff;
+}
 
 /* Filter VD Store di sidebar kategori: tombol Reset/Terapkan tidak meluber di kolom sempit. */
 .left-sidebar .wps-mt-4.wps-flex {
